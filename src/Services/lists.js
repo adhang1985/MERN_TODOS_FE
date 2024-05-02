@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const URL = `${window.location.origin}/api/list`;
+const URL = "http://localhost:2000/api/list";
 
 // create task
 export const createTask = async(option,data) => {
