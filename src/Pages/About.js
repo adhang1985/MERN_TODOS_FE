@@ -2,6 +2,7 @@ import React from 'react'
 import '../Styles/About.css'
 
 const About = () => {
+  
   return (
     <div className='about d-flex justify-content-center align-items-center'>
        <div className='container'>
