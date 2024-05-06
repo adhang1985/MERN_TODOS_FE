@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const URL = "http://localhost:2000/api/auth";
+const URL = "https://mern-todos-be-p203.onrender.com/api/auth";
 
 export const signup = async(obj) => {
     const response = await axios.post(`${URL}/signup`,obj);

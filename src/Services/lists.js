@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const URL = "http://localhost:2000/api/list";
+const URL = "https://mern-todos-be-p203.onrender.com/api/list";
 
 // create task
 export const createTask = async(option,data) => {
