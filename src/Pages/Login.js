@@ -6,6 +6,7 @@ import { login } from '../Services/auth';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import AuthContext from '../Context/Authcontext';
+import { ThreeDots } from 'react-loader-spinner';
 
 const Login = () => {
 
@@ -13,6 +14,8 @@ const Login = () => {
      email:"",
      password:""
  });
+
+ const [isLoading,setIsloading] = useState(false);
 
  const navigateTo = useNavigate();
 
@@ -24,7 +27,9 @@ const Login = () => {
  }
 
  const signin = async() => {
+    setIsloading(true);
     if(!inputs.email || !inputs.password){
+        setIsloading(false);
         return toast.error("Please fill your credentials!");
     }
     try {
@@ -34,11 +39,12 @@ const Login = () => {
         sessionStorage.setItem('id',response.data._id);
         sessionStorage.setItem('email',response.data.email);
         setIsAuth(true);
-        setTimeout(() => {
-            navigateTo('/');
-        }, 2000);
+        setIsloading(false);
+        navigateTo('/');
+        
     } catch (error) {
         toast(error.message);
+        setIsloading(false);
     }
  }
 
@@ -46,6 +52,21 @@ const Login = () => {
   return (
     <div className='signup'>
         <ToastContainer/>
+        {
+            isLoading && 
+            <div className='loader'>
+                <ThreeDots
+  visible={true}
+  height="80"
+  width="80"
+  color="#4fa94d"
+  radius="9"
+  ariaLabel="three-dots-loading"
+  wrapperStyle={{}}
+  wrapperClass=""
+  />
+            </div>
+        }
         <div className='container'>
             <div className='row'>
                 <div className='col-lg-4 column d-flex justify-content-center align-items-center'>

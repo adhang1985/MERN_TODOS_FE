@@ -3,6 +3,7 @@ import '../Styles/Todos.css'
 import Todo from '../Components/Todo'
 import { getAllTasks } from '../Services/lists';
 import AuthContext from '../Context/Authcontext';
+import { ThreeDots } from 'react-loader-spinner';
 
 const TodoList = () => {
 
@@ -11,6 +12,7 @@ const TodoList = () => {
 
   const [tasks,setTasks] = useState();
   const {isDel,setIsDel} = useContext(AuthContext);
+  const [isLoading,setIsloading] = useState(false);
 
   const options = {
      params : userId,
@@ -20,13 +22,16 @@ const TodoList = () => {
   }
 
   const getTasks = async() => {
+    setIsloading(true);
     try {
        const response = await getAllTasks(options);
        if(response.success){
+        setIsloading(false);
         setIsDel(false);
        }
        setTasks(response.data);
     } catch (error) {
+      setIsloading(false);
        console.log(error.message);
     }
  }
@@ -37,6 +42,21 @@ const TodoList = () => {
 
   return (
     <div className='todos'>
+      {
+            isLoading && 
+            <div className='loader'>
+                <ThreeDots
+  visible={true}
+  height="80"
+  width="80"
+  color="#4fa94d"
+  radius="9"
+  ariaLabel="three-dots-loading"
+  wrapperStyle={{}}
+  wrapperClass=""
+  />
+            </div>
+        }
         <div className='container'>
             <h1>Todo List</h1>
             <div className='row'>

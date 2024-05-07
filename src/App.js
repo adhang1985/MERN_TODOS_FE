@@ -10,6 +10,7 @@ import TodoList from './Pages/TodoList'
 import AddTodo from './Pages/AddTodo'
 import EditTodo from './Pages/EditTodo'
 import AuthContext from './Context/Authcontext'
+import './App.css'
 
 const App = () => {
 
