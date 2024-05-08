@@ -38,6 +38,7 @@ const Login = () => {
         localStorage.setItem("token",response.accessToken);
         sessionStorage.setItem('id',response.data._id);
         sessionStorage.setItem('email',response.data.email);
+        sessionStorage.setItem('user',response.data.username);
         setIsAuth(true);
         setIsloading(false);
         navigateTo('/');

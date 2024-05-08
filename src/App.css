@@ -8,3 +8,11 @@
     background: rgb(242, 239, 239);
     opacity: 0.4;
 }
+li.user-info{
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+li.user-info p{
+    margin-bottom:0;
+}

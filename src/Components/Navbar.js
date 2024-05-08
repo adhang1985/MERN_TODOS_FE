@@ -9,10 +9,13 @@ const Navbar = () => {
      const {isAuth,setIsAuth} = useContext(AuthContext);
      const navigateTo = useNavigate();
 
+     const user = sessionStorage.getItem('user');
+
      const logout = () => {
           localStorage.removeItem('token');
           sessionStorage.removeItem('id');
           sessionStorage.removeItem('email');
+          sessionStorage.removeItem('user');
           setIsAuth(false);
           navigateTo('/login');
      }
@@ -41,6 +44,9 @@ const Navbar = () => {
                               </li>
                               <li className="nav-item mx-2">
                                    <button type='submit' className='nav-link' onClick={logout}>Logout</button>
+                              </li>
+                              <li className="nav-item mx-2 user-info">
+                                   <p>Hi&nbsp;<span>{user}</span></p>
                               </li>
                          </>
                     }
