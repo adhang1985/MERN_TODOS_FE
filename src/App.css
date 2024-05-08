@@ -17,13 +17,6 @@ li.user-info{
 li.user-info p{
     margin-bottom:0;
 }
-.card-actions.d-flex.align-items-center {
-    justify-content: space-between;
-}
-.card-actions.d-flex.align-items-center p{
-    margin: 0;
-}
-.card-actions.d-flex.align-items-center div{
-    align-items: center;
-    display: inline-flex;
+li.user-info p span {
+    text-transform: capitalize;
 }

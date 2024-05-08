@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import '../Styles/Todos.css'
 import { Link } from 'react-router-dom'
 import { MdOutlineModeEdit } from "react-icons/md";
@@ -14,6 +14,7 @@ const Todo = (props) => {
   const email = sessionStorage.getItem('email');
   const eventDateNew = new Date(eventDate).toLocaleDateString();
   const {setIsDel} = useContext(AuthContext);
+  const [status,setStatus] = useState("red");
 
   const options = {
     params : _id,
@@ -33,15 +34,42 @@ const Todo = (props) => {
     }
  }
 
+ const getDateStatus = () => {
+    const today = new Date().toLocaleDateString();
+    console.log(today);
+    console.log(eventDateNew);
+    if(eventDateNew > today){
+      setStatus('future');
+    }
+    else if(eventDateNew < today){
+      setStatus('past');
+    }
+    else{
+      setStatus('present');
+    }
+ }
+
+ useEffect(() => {
+    getDateStatus();
+ },[])
+
   return (
-    <div className="card">
+    <div className={`card ${status}`}>
         <div className="card-body">
             <h5 className="card-title">{title}</h5>
             <p className="card-text">{body}</p>
             <div className='card-actions d-flex align-items-center'>
-              <p>Event Date : <span>{eventDateNew}</span></p>
+              {
+                (status !== 'past') ? <p>Event Date : <span>{eventDateNew}</span></p>
+                :
+                <p>Expired on <span>{eventDateNew}</span></p>
+              }
+              
               <div>
-                <Link to={`/todos/edit/${_id}`} className="card-link"><MdOutlineModeEdit/></Link>
+                {
+                  (status !== 'past') && <Link to={`/todos/edit/${_id}`} className="card-link"><MdOutlineModeEdit/></Link>
+                }
+                
                 <button className="card-link" type='button' onClick={remove}><MdDeleteForever/></button>
               </div>  
             </div>

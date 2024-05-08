@@ -73,7 +73,7 @@ const update = async() => {
             <div className='d-flex flex-column w-50 todo-input-wrap'>
                 <input type='text' name='title' placeholder='Enter title' className='my-2 p-2 todo-inputs' value={task.title} onChange={handleChange}/>
                 <textarea name='body' placeholder='Enter details' className='p-2 my-2 todo-inputs' value={task.body} onChange={handleChange}/>
-                <DatePicker selected={eventDate} onChange={(date) => setEventDate(date)} dateFormat="dd/MM/yyyy"/>
+                <DatePicker selected={eventDate} onChange={(date) => setEventDate(date)} dateFormat="dd/MM/yyyy"  minDate={new Date()} placeholderText="Select date here"/>
             </div>
             <button type='submit' className='p-2 my-2 add-btn' onClick={update}>Save</button>
         </div>

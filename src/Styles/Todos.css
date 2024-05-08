@@ -1,6 +1,7 @@
 .todos,.new-todo{
     width: 100%;
     height: 100vh;
+    margin-top: 2rem;
 }
 .todo-inputs{
     outline: none;
@@ -21,4 +22,25 @@
 }
 .todos .card a.card-link{
     color: green;
+}
+.card-actions.d-flex.align-items-center {
+    justify-content: space-between;
+}
+.card-actions.d-flex.align-items-center p{
+    margin: 0;
+}
+.card-actions.d-flex.align-items-center div{
+    align-items: center;
+    display: inline-flex;
+}
+.card.future {
+    border: 1px solid green;
+}
+.card.present {
+    border: 1px solid orange;
+}
+.card.past {
+    border: 1px solid red;
+    opacity: 0.5;
+    background: #eee;
 }
