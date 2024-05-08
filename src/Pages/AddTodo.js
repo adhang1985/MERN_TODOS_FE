@@ -6,6 +6,9 @@ import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { ThreeDots } from 'react-loader-spinner';
+import DatePicker from 'react-datepicker';  
+   
+import "react-datepicker/dist/react-datepicker.css";  
 
 const AddTodo = () => {
 
@@ -16,6 +19,7 @@ const AddTodo = () => {
     const navigateTo = useNavigate();
     const [inputs,setInputs] = useState(initialVals);
     const [isLoading,setIsloading] = useState(false);
+    const [eventDate, setEventDate] = useState("");
 
     const email = sessionStorage.getItem('email');
     const token = localStorage.getItem('token');
@@ -27,7 +31,7 @@ const AddTodo = () => {
 
     const createTodo = async() => {
         setIsloading(true);
-        if(!inputs.title || !inputs.body){
+        if(!inputs.title || !inputs.body || !eventDate){
             setIsloading(false);
             return toast.error("Please fill the details");
         }
@@ -35,8 +39,10 @@ const AddTodo = () => {
             const obj = {
               title:inputs.title,
               body:inputs.body,
+              eventDate,
               email
             }
+            console.log(obj);
             const header = {
                 Authorization: `Bearer ${token}`
             }
@@ -77,6 +83,7 @@ const AddTodo = () => {
             <div className='d-flex flex-column w-50 todo-input-wrap'>
                 <input type='text' name='title' placeholder='Enter title' className='my-2 p-2 todo-inputs' value={inputs.title} onChange={handleChange}/>
                 <textarea name='body' placeholder='Enter details' className='p-2 my-2 todo-inputs' value={inputs.body} onChange={handleChange}/>
+                <DatePicker selected={eventDate} onChange={(date) => setEventDate(date)} dateFormat="dd/MM/yyyy"/>
             </div>
             <button type='submit' className='p-2 my-2 add-btn' onClick={createTodo}>Add</button>
         </div>

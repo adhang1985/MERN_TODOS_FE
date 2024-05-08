@@ -8,10 +8,11 @@ import AuthContext from '../Context/Authcontext';
 
 const Todo = (props) => {
 
-  const {_id,title,body} = props.data;
+  const {_id,title,body,eventDate} = props.data;
 
   // const token = localStorage.getItem('token');
   const email = sessionStorage.getItem('email');
+  const eventDateNew = new Date(eventDate).toLocaleDateString();
   const {setIsDel} = useContext(AuthContext);
 
   const options = {
@@ -37,9 +38,12 @@ const Todo = (props) => {
         <div className="card-body">
             <h5 className="card-title">{title}</h5>
             <p className="card-text">{body}</p>
-            <div className='card-actions d-flex align-items-center justify-content-end'>
+            <div className='card-actions d-flex align-items-center'>
+              <p>Event Date : <span>{eventDateNew}</span></p>
+              <div>
                 <Link to={`/todos/edit/${_id}`} className="card-link"><MdOutlineModeEdit/></Link>
                 <button className="card-link" type='button' onClick={remove}><MdDeleteForever/></button>
+              </div>  
             </div>
         </div>
     </div>
