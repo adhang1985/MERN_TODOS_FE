@@ -26,9 +26,9 @@ const TodoList = () => {
     try {
        const response = await getAllTasks(options);
        if(response.success){
-        setIsloading(false);
         setIsDel(false);
        }
+       setIsloading(false);
        setTasks(response.data);
     } catch (error) {
       setIsloading(false);
