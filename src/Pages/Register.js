@@ -26,8 +26,8 @@ const Register = () => {
         setIsloading(true);
         try {
             console.log(inputs);
-            setIsloading(false);
             await signup(inputs);
+            setIsloading(false);
             navigateTo('/login');
         } catch (error) {
             setIsloading(false);

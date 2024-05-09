@@ -5,6 +5,7 @@ import { MdOutlineModeEdit } from "react-icons/md";
 import { MdDeleteForever } from "react-icons/md";
 import { removeTask } from '../Services/lists';
 import AuthContext from '../Context/Authcontext';
+import dateFormat from '../Services/utils';
 
 const Todo = (props) => {
 
@@ -12,7 +13,8 @@ const Todo = (props) => {
 
   // const token = localStorage.getItem('token');
   const email = sessionStorage.getItem('email');
-  const eventDateNew = new Date(eventDate).toLocaleDateString();
+  const eventDateNew = new Date(eventDate);
+  const issueDate = dateFormat(eventDateNew);
   const {setIsDel} = useContext(AuthContext);
   const [status,setStatus] = useState("red");
 
@@ -34,14 +36,16 @@ const Todo = (props) => {
     }
  }
 
+ 
+
  const getDateStatus = () => {
-    const today = new Date().toLocaleDateString();
-    console.log(today);
-    console.log(eventDateNew);
-    if(eventDateNew > today){
+    const today = new Date();
+    const todayDate = dateFormat(today);
+    console.log(todayDate);
+    if(issueDate > todayDate){
       setStatus('future');
     }
-    else if(eventDateNew < today){
+    else if(issueDate < todayDate){
       setStatus('past');
     }
     else{
@@ -53,6 +57,9 @@ const Todo = (props) => {
     getDateStatus();
  },[])
 
+
+
+
   return (
     <div className={`card ${status}`}>
         <div className="card-body">
@@ -60,9 +67,9 @@ const Todo = (props) => {
             <p className="card-text">{body}</p>
             <div className='card-actions d-flex align-items-center'>
               {
-                (status !== 'past') ? <p>Event Date : <span>{eventDateNew}</span></p>
+                (status !== 'past') ? <p>Event Date : <span>{issueDate}</span></p>
                 :
-                <p>Expired on <span>{eventDateNew}</span></p>
+                <p>Expired on <span>{issueDate}</span></p>
               }
               
               <div>

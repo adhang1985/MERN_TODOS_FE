@@ -44,3 +44,8 @@
     opacity: 0.5;
     background: #eee;
 }
+.new-todo .btn-secondary {
+    background: #fff;
+    color: #000;
+    margin-left: 10px !important;
+}

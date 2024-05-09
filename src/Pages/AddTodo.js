@@ -79,7 +79,7 @@ const AddTodo = () => {
             </div>
         }
         <div className='container'>
-            <h1>Create Todo</h1>
+            <h1>Create Task</h1>
             <div className='d-flex flex-column w-50 todo-input-wrap'>
             <DatePicker selected={eventDate} onChange={(date) => setEventDate(date)} dateFormat="dd/MM/yyyy"  minDate={new Date()} placeholderText="Select date here"/>
                 <input type='text' name='title' placeholder='Enter title' className='my-2 p-2 todo-inputs' value={inputs.title} onChange={handleChange}/>
@@ -87,6 +87,7 @@ const AddTodo = () => {
                 
             </div>
             <button type='submit' className='p-2 my-2 add-btn' onClick={createTodo}>Add</button>
+            <button type='submit' className='p-2 my-4 btn btn-secondary' onClick={() => navigateTo('/todos')}>Cancel</button>
         </div>
     </div>
   )
